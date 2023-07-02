@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Person } from "./components/item";
 import "bootstrap/dist/css/bootstrap.css";
 import Table from "react-bootstrap/Table";
 import moment from "moment";
+
+interface PersonProps {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: string;
+  birthday: string;
+  salary: number;
+  phone: string;
+}
 
 const persons = [
   {
@@ -1018,13 +1029,59 @@ const formatPhone = (phone: string) => {
 };
 function App() {
   const [type, setType] = useState<string>("all");
+
+  const [sortedPersons, setSortedPersons] = useState<PersonProps[]>(persons);
+
+  useEffect(() => {
+    let sortedArray = [...persons];
+    switch (type) {
+      case "id":
+        sortedArray.sort((a, b) => a.id - b.id);
+        break;
+      case "firstName":
+        sortedArray.sort((a, b) => a.firstName.localeCompare(b.firstName));
+        break;
+      case "lastName":
+        sortedArray.sort((a, b) => a.lastName.localeCompare(b.lastName));
+        break;
+      case "email":
+        sortedArray.sort((a, b) => a.email.localeCompare(b.email));
+        break;
+      case "birthday":
+        sortedArray.sort(
+          (a, b) =>
+            new Date(a.birthday).getTime() - new Date(b.birthday).getTime()
+        );
+        break;
+      case "salary":
+        sortedArray.sort((a, b) => a.salary - b.salary);
+        break;
+      default:
+        // Không sắp xếp
+        break;
+    }
+    setSortedPersons(sortedArray);
+  }, [type]);
+
+  // const onClickType = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setType(event.target.value);
+  // };
+  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setType(event.target.value);
+  };
   return (
     <div>
       <h1>A simple web app</h1>
       <h3>
         OrderBy
-        <select name="type" id="">
-          <option value="all">Select field to sort</option>
+        <select
+          style={{ paddingLeft: "2px" }}
+          name="type"
+          id=""
+          value={type}
+          onChange={handleTypeChange}
+        >
+          <option value="default">Select field to sort</option>
           <option value="id">Id</option>
           <option value="firstName">First Name</option>
           <option value="lastName">Last Name</option>
@@ -1033,6 +1090,85 @@ function App() {
           <option value="salary">Salary</option>
         </select>
       </h3>
+      {/* <h3>Order by</h3>
+      <label htmlFor="">
+        <input
+          type="radio"
+          name="type"
+          value="default"
+          checked={type === "default"}
+          onChange={onClickType}
+        />
+        Default
+      </label>
+      <br />
+      <label htmlFor="">
+        <input
+          type="radio"
+          name="type"
+          value="id"
+          checked={type === "id"}
+          onChange={onClickType}
+        />
+        Id
+      </label>
+      <br />
+      <label htmlFor="">
+        <input
+          type="radio"
+          name="type"
+          value="firstName"
+          checked={type === "firstName"}
+          onChange={onClickType}
+        />
+        First Name
+      </label>
+      <br />
+      <label htmlFor="">
+        <input
+          type="radio"
+          name="type"
+          value="lastName"
+          checked={type === "lastName"}
+          onChange={onClickType}
+        />
+        Last Name
+      </label>
+      <br />
+      <label htmlFor="">
+        <input
+          type="radio"
+          name="type"
+          value="email"
+          checked={type === "email"}
+          onChange={onClickType}
+        />
+        Email
+      </label>
+      <br />
+      <label htmlFor="">
+        <input
+          type="radio"
+          name="type"
+          value="birthday"
+          checked={type === "birthday"}
+          onChange={onClickType}
+        />
+        Birthday
+      </label>
+      <br />
+      <label htmlFor="">
+        <input
+          type="radio"
+          name="type"
+          value="salary"
+          checked={type === "salary"}
+          onChange={onClickType}
+        />
+        Salary
+      </label>
+      <br /> */}
+
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -1047,7 +1183,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {persons.map((person) => (
+          {sortedPersons.map((person) => (
             <tr key={person.id}>
               <Person
                 id={person.id}
