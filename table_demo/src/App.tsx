@@ -1069,6 +1069,7 @@ function App() {
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setType(event.target.value);
   };
+
   return (
     <div>
       <h1>A simple web app</h1>
