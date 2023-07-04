@@ -8,6 +8,7 @@ interface Props {
   isCompleted: boolean;
   onRemove: (id: number) => void;
   onEdit: (id: number, title: string) => void;
+  onDone: (id: number) => void;
 }
 
 export const TodoItem = ({
@@ -16,9 +17,14 @@ export const TodoItem = ({
   isCompleted,
   onRemove,
   onEdit,
+  onDone,
 }: Props) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [todoContent, setTodoContent] = useState<string>(title);
+
+  const onClickDone = () => {
+    onDone(id);
+  };
 
   const handleClickEdit = () => {
     if (isEditing) {
@@ -55,6 +61,9 @@ export const TodoItem = ({
       </Button>
       <Button variant="danger" size="sm" onClick={onClickRemoveOrCancel}>
         {isEditing ? "Cancel" : "Delete"}
+      </Button>
+      <Button variant="success" size="sm" onClick={onClickDone}>
+        Done
       </Button>
     </div>
   );
