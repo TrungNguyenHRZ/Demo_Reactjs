@@ -1,14 +1,11 @@
 .App {
-    justify-content: center;
     display: flex;
     justify-content: center;
-    align-self: center;
 }
 
 .container {
     margin-top: 5%;
     width: 500px;
-    position: absolute;
     justify-content: center;
 
 }
