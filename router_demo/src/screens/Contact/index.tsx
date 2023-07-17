@@ -1,16 +1,48 @@
 import React from "react";
+import { Form, useParams, useNavigate } from "react-router-dom";
 
-import { Form } from "react-router-dom";
-
-export default function Contact() {
-    const contact = {
-        first: "Your",
-        last: "Name",
+const contacts = [
+    {
+        id: "1",
+        first: "Nguyen",
+        last: "Trung",
         avatar: "https://placekitten.com/g/200/200",
         twitter: "your_handle",
         notes: "Some notes",
         favorite: true,
-    };
+    },
+    {
+        id: "2",
+        first: "Luu",
+        last: "Tam",
+        avatar: "https://placekitten.com/g/200/200",
+        twitter: "your_handle",
+        notes: "Some notes",
+        favorite: true,
+    },
+    {
+        id: "3",
+        first: "Nguyen",
+        last: "Quynh",
+        avatar: "https://placekitten.com/g/200/200",
+        twitter: "your_handle",
+        notes: "Some notes",
+        favorite: true,
+    }
+]
+
+export default function Contact() {
+    const params = useParams();
+    const navigate = useNavigate();
+    const { contactId } = params;
+    const contact = contacts.find((contact) => contact.id === contactId)
+    const onHomepage = () => {
+        navigate("/");
+    }
+
+    if (!contact) {
+        return <h1>No contact found</h1>
+    }
 
     return (
         <div id="contact">
@@ -32,7 +64,7 @@ export default function Contact() {
                     )}{" "}
                     <Favorite contact={contact} />
                 </h1>
-
+                <h3>Contact number: {contactId}</h3>
                 {contact.twitter && (
                     <p>
                         <a
@@ -47,6 +79,7 @@ export default function Contact() {
                 {contact.notes && <p>{contact.notes}</p>}
 
                 <div>
+                    <button onClick={onHomepage}>Homepage</button>
                     <Form action="edit">
                         <button type="submit">Edit</button>
                     </Form>

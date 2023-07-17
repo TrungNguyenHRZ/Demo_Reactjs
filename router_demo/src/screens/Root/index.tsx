@@ -35,7 +35,13 @@ const Root = () => {
                             <Link to={`/contacts/1`}>Your Name</Link>
                         </li>
                         <li>
-                            <Link to={`/contacts/2`}>Your Friend</Link>
+                            <Link to={`/contacts/2`}>Your Friend 1</Link>
+                        </li>
+                        <li>
+                            <Link to={`/contacts/3`}>Your Friend 2</Link>
+                        </li>
+                        <li>
+                            <Link to={`/contacts/4`}>Your Friend 3</Link>
                         </li>
                     </ul>
                 </nav>
