@@ -5,7 +5,7 @@ const Form = () => {
 
     return (
         <>
-            <form action="">
+            <form className="form-recipes" action="">
                 <div className="">
                     <button className="btn btn-save">Save</button>
                     <button className="btn btn-cancel">Cancel</button>
