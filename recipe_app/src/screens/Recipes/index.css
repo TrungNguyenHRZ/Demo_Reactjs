@@ -1,0 +1,50 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+    padding-left: 30px;
+    align-items: flex-start
+}
+
+.item {
+    width: 800px;
+}
+
+button {
+    border: none;
+    padding: 10px;
+    background-color: rgb(0, 190, 0);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.btn-newRecipe {
+    border-bottom: 1px solid rgb(206, 206, 206);
+    padding-bottom: 15px;
+}
+
+.form-newRecipe {
+    border-bottom: 1px solid rgb(206, 206, 206);
+    padding-bottom: 15px;
+    padding-left: 50px;
+}
+
+.btn-cancel {
+    background-color: red;
+}
+
+textarea,
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+}

@@ -5,7 +5,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Root from './screens/Root'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { error } from 'console';
+import Recipes from './screens/Recipes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/recipes",
-        element: <h1>This is recipes</h1>
+        element: <Recipes />
       },
       {
         path: "/shopping-list",
