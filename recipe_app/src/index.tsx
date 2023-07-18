@@ -7,6 +7,7 @@ import Root from './screens/Root'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Recipes from './screens/Recipes';
 import ShoppingList from './screens/ShoppingList';
+import Albums from './screens/Albums';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
       {
         path: "/shopping-list",
         element: <ShoppingList />
+      },
+      {
+        path: "/albums",
+        element: <Albums />
+      },
+      {
+        path: "/albums/:album",
+        element: <h1>This is album X</h1>
       }
     ]
   }

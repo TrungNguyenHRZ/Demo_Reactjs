@@ -10,6 +10,7 @@ const Root = () => {
                         <li className="nav-h1"><Link to="">Recipe Book</Link></li>
                         <li className="nav-item"><Link to="/recipes">Recipes</Link></li>
                         <li className="nav-item"><Link to="/shopping-list">Shopping List</Link></li>
+                        <li className="nav-item"><Link to="/albums">Albums</Link></li>
                     </ul>
                 </div>
             </div>
