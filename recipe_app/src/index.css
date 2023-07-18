@@ -18,7 +18,7 @@
   position: relative;
 }
 
-a {
+.link-index {
   display: block;
   text-decoration: none;
   font-size: 25px;
@@ -29,4 +29,14 @@ a {
 
 .nav-item:hover {
   background-color: rgb(211, 211, 211);
+}
+
+.link-albums {
+  text-decoration: none;
+  color: blue;
+  font-size: 20px;
+}
+
+.link-albums:hover {
+  color: red;
 }

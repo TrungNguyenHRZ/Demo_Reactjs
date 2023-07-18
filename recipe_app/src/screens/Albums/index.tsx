@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HashLoader } from "react-spinners";
+import { Link } from 'react-router-dom';
 
 interface Album {
     userId: number
@@ -37,7 +38,9 @@ const Albums = () => {
             {albums.length > 0 ? (
                 <>
                     {albums.map((album) => (
-                        <li style={{ marginLeft: "10px" }} key={album.id}>{album.title}</li>
+                        <li>
+                            <Link className="link-albums" to={`/albums/1`} style={{ marginLeft: "10px" }} key={album.id}>{album.title}</Link>
+                        </li>
                     ))}
                 </>
             ) : (
