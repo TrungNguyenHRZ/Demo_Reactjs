@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Root from './screens/Root'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Recipes from './screens/Recipes';
+import ShoppingList from './screens/ShoppingList';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/shopping-list",
-        element: <h1>This is shopping list</h1>
+        element: <ShoppingList />
       }
     ]
   }

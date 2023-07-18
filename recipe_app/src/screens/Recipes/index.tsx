@@ -8,13 +8,10 @@ const Recipes = () => {
     const handleNewButtonClick = () => {
         setShowForm(true);
     }
-    // if (!showForm) {
-    //     return <h1>Please select a Recipe!</h1>
-    // }
     return (
         <div id="container">
             <div className="item btn-newRecipe">
-                <button onClick={handleNewButtonClick}>New Recipe</button>
+                <button className="btn btn-newRecipe" onClick={handleNewButtonClick}>New Recipe</button>
             </div>
             <div className="item form-newRecipe">
                 {showForm ? <Form /> : <h1>Please select a Recipe!</h1>}

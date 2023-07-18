@@ -6,11 +6,11 @@ const Form = () => {
     return (
         <>
             <form action="">
-                <div className="btn">
+                <div className="">
                     <button className="btn btn-save">Save</button>
                     <button className="btn btn-cancel">Cancel</button>
                 </div>
-                <div>
+                <div className="input-form">
                     <label htmlFor="">Name</label><br />
                     <input type="text" name="" id="" /><br />
                     <label htmlFor="">Image URL</label><br />
@@ -19,6 +19,9 @@ const Form = () => {
                     <textarea name="" id="" cols={30} rows={10}></textarea>
                 </div>
             </form>
+            <div>
+                <button className="btn btn-addIngredient">Add Ingredient</button>
+            </div>
         </>
     )
 }
