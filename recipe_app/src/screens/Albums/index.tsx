@@ -30,7 +30,7 @@ const Albums = () => {
         return (
             <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
                 <HashLoader
-                    color="#36d7b7"
+                    color="#5a5a5a"
                     style={{ position: "absolute", top: "50%", left: "50%" }} />
             </div>
         )

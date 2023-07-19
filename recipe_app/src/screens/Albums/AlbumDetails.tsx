@@ -31,10 +31,10 @@ const AlbumDetails = () => {
         return (
             <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
                 <PulseLoader
-                    color="rgba(0, 140, 255, 1)"
+                    color="#5a5a5a"
                     size={30}
                     speedMultiplier={1}
-                    style={{ position: "absolute", top: "10%", left: "5%" }}
+                    style={{ position: "absolute", top: "40%", left: "45%" }}
                 />
             </div>
         );
