@@ -15,6 +15,7 @@ const AlbumDetails = () => {
 
     useEffect(() => {
         getAlbumDetails();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [albumId])
 
     const getAlbumDetails = () => {
