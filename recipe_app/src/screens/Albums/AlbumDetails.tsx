@@ -46,9 +46,9 @@ const AlbumDetails = () => {
             <hr />
             {album ? (
                 <div className="albumDetail">
-                    <p><strong>User ID:</strong> {album.userId}</p>
-                    <p><strong>ID:</strong> {album.id}</p>
-                    <p><strong>Title:</strong> {album.title}</p>
+                    <p><b>User ID:</b> {album.userId}</p>
+                    <p><b>ID:</b> {album.id}</p>
+                    <p><b>Title:</b> {album.title}</p>
                 </div>
             ) : (
                 <h1>No album found</h1>
