@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HashLoader } from "react-spinners";
 import { Link } from 'react-router-dom';
+import './index.css'
 
 interface Album {
     userId: number
@@ -9,7 +10,7 @@ interface Album {
 }
 const Albums = () => {
     const [albums, setAlbums] = useState<Album[]>([]);
-    const [isLoading, setIsLoading] = useState<Boolean>(false)
+    const [isLoading, setIsLoading] = useState<Boolean>(false);
 
     useEffect(() => {
         getAllAlbums();
@@ -27,25 +28,35 @@ const Albums = () => {
 
     if (isLoading) {
         return (
-            <div style={{ position: "relative", width: "100vh", height: "100vh" }}>
-                <HashLoader color="#36d7b7" style={{ position: "absolute", top: "50%", left: "50%" }} />
+            <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
+                <HashLoader
+                    color="#36d7b7"
+                    style={{ position: "absolute", top: "50%", left: "50%" }} />
             </div>
         )
     }
+
     return (
-        <div style={{ margin: "30px" }}>
-            <h2>Display all title of albums</h2><hr />
-            {albums.length > 0 ? (
-                <>
-                    {albums.map((album) => (
-                        <li>
-                            <Link className="link-albums" to={`/albums/1`} style={{ marginLeft: "10px" }} key={album.id}>{album.title}</Link>
-                        </li>
-                    ))}
-                </>
-            ) : (
-                <p>No album found</p>
-            )}
+        <div id="container-albums">
+            <div style={{ margin: "30px" }}>
+                <h2>Display all title of albums</h2><hr />
+                {albums.length > 0 ? (
+                    <ul className="grid" style={{ listStyleType: `decimal` }}>
+                        {albums.map((album) => (
+                            <li className="li-album" key={album.id}>
+                                <Link
+                                    className="link-albums"
+                                    to={`/albums/${album.id}`}
+                                    style={{ marginLeft: "10px" }} >
+                                    {album.title}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No album found</p>
+                )}
+            </div>
         </div>
     )
 }

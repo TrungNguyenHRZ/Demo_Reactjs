@@ -1,0 +1,18 @@
+#container-albums {
+    display: flex;
+    justify-content: center;
+}
+
+.albumDetail {
+    font-size: 25px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.li-album {
+    padding-right: 20px;
+}
