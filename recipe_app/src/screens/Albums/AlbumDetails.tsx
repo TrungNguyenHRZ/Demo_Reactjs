@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { PulseLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 
 interface Album {
     userId: number
@@ -30,7 +30,7 @@ const AlbumDetails = () => {
     if (isLoading) {
         return (
             <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
-                <PulseLoader
+                <BeatLoader
                     color="#5a5a5a"
                     size={30}
                     speedMultiplier={1}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HashLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import { Link } from 'react-router-dom';
 import './index.css'
 
@@ -29,9 +29,12 @@ const Albums = () => {
     if (isLoading) {
         return (
             <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
-                <HashLoader
+                <BeatLoader
                     color="#5a5a5a"
-                    style={{ position: "absolute", top: "50%", left: "50%" }} />
+                    size={30}
+                    speedMultiplier={1}
+                    style={{ position: "absolute", top: "40%", left: "45%" }}
+                />
             </div>
         )
     }
@@ -39,7 +42,7 @@ const Albums = () => {
     return (
         <div id="container-albums">
             <div style={{ margin: "30px" }}>
-                <h2>Display all title of albums</h2><hr />
+                <h1>Display all title of albums</h1><hr />
                 {albums.length > 0 ? (
                     <ul className="grid" style={{ listStyleType: `decimal` }}>
                         {albums.map((album) => (
