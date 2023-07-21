@@ -43,45 +43,32 @@ function App() {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <table style={{ border: "1px solid" }}>
-        <tr>
-          <td style={{ border: "1px solid" }}>
-            <section style={{ marginBottom: "10px" }}>
-              <AddTodo handleAdd={handleAddTodo} />
-            </section>
-          </td>
-          <td style={{ border: "1px solid" }}>
-            <h2>Completed Todo</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style={{ border: "1px solid" }}>
-            <section>
-              {todos.map((todo) => (
-                <TodoItem
-                  key={todo.id}
-                  id={todo.id}
-                  title={todo.title}
-                  isCompleted={todo.isCompleted}
-                  onRemove={handleRemoveItem}
-                  onEdit={handleEdit}
-                  onDone={handleDone}
-                />
-              ))}
-            </section>
-          </td>
-          <td style={{ border: "1px solid" }}>
-            <section>
-              {completedTodos.map((todo) => (
-                <h3 key={todo.id}>
-                  {todo.title} <Badge bg="success">Done</Badge>
-                </h3>
-              ))}
-            </section>
-          </td>
-        </tr>
-      </table>
+    <div>
+      <section style={{ marginBottom: "10px" }}>
+        <AddTodo handleAdd={handleAddTodo} />
+      </section>
+      <section>
+        {todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            isCompleted={todo.isCompleted}
+            onRemove={handleRemoveItem}
+            onEdit={handleEdit}
+            onDone={handleDone}
+          />
+        ))}
+      </section>
+      <hr />
+      <h2>Completed Todo</h2>
+      <section>
+        {completedTodos.map((todo) => (
+          <h3 key={todo.id}>
+            {todo.title} <Badge bg="success">Done</Badge>
+          </h3>
+        ))}
+      </section>
       {/* <div style={{ padding: "1rem" }}>
         <section style={{ marginBottom: "10px" }}>
           <AddTodo handleAdd={handleAddTodo} />
