@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <div className="my-home-container">
       <audio id="background-music" loop>
-        <source src="./sound/home.mp3" type="audio/mpeg" />
+        <source src="sound/home.mp3" type="audio/mpeg" />
       </audio>
       <button onClick={handlePlayMusic}>Play Music</button>
       <div className="my-logo-class">
