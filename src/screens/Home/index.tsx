@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./index.css";
 import Card from "./Card";
 import Round from "./Round";
@@ -7,6 +7,10 @@ import Round from "./Round";
 const Home = () => {
 
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [isMutePlaying, setIsMutePlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+
 
   const handleCardUserClick = () => {
     console.log("Clicked!");
@@ -14,18 +18,38 @@ const Home = () => {
   };
 
   const handlePlayMusic = () => {
-    const audioElement = document.getElementById('background-music') as HTMLAudioElement;
-    console.log(audioElement);
-    audioElement.play();
-    setIsMusicPlaying(true);
+    if (audioRef.current) {
+      if (audioRef.current.paused) {
+        console.log('played')
+        setIsMusicPlaying(true)
+      } else {
+        audioRef.current.pause()
+        console.log('paused')
+        setIsMusicPlaying(false)
+      }
+    }
+    // const audioElement = document.getElementById('background-music') as HTMLAudioElement;
+    // audioElement.play();
+    // setIsMusicPlaying(true);
   };
+
+  const handleMuteMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !audioRef.current.muted
+      setIsMutePlaying(audioRef.current.muted)
+      console.log(audioRef.current.muted ? 'muted' : 'unmuted');
+
+    }
+  }
 
   return (
     <div className="my-home-container">
-      <audio id="background-music" loop>
-        <source src="./sound/home.mp3" type="audio/mpeg" />
+      <audio ref={audioRef} loop autoPlay>
+        <source src="./sound/home.mp3" type="audio/mp3" />
       </audio>
-      <button onClick={handlePlayMusic}>Play Music</button>
+      <button onClick={handlePlayMusic}>{isMusicPlaying ? 'Play' : 'Pause'} Music</button> <br></br>
+      <button onClick={handleMuteMusic}>{isMutePlaying ? 'Muted' : 'Mute'} Mute
+      </button>
       <div className="my-logo-class">
         <img
           className="my-logo"
