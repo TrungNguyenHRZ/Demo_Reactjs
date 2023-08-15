@@ -5,6 +5,14 @@ import Card from "./Card";
 import Round from "./Round";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import music from "../Assets/sound/home.mp3";
+
+interface StarShipData {
+  name: string;
+  max_atmosphering_speed: string;
+  cost_in_credits: string;
+  passengers: string;
+  films: string[];
+}
 const Home = () => {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -16,11 +24,23 @@ const Home = () => {
   const [computerScore, setComputerScore] = useState(0);
   // state for count
   const [createCount, setCreateCount] = useState<number>(0);
+  const [userCardInfoData, setUserCardInfoData] = useState<StarShipData | null>(
+    null
+  );
+  const [computerCardInfoData, setComputerCardInfoData] =
+    useState<StarShipData | null>(null);
 
   const handleCardUserClick = () => {
     console.log("Clicked!");
+    handleGetDataClick();
   };
-
+  const handleGetDataClick = () => {
+    if (userCardInfoData) {
+      console.log("userCardInfoData:", userCardInfoData);
+    } else {
+      console.log("Nothing!");
+    }
+  };
   const handlePlayMusic = () => {
     if (audioRef.current) {
       if (audioRef.current.paused) {
@@ -86,8 +106,14 @@ const Home = () => {
           clickable={true}
           clickedItems={clickedItems}
           onClickItem={(id) => setClickedItems((prev) => [...prev, id])}
+          starShipData={userCardInfoData}
         />
-        <Card type="computer" clickable={false} clickedItems={clickedItems} />
+        <Card
+          type="computer"
+          clickable={false}
+          clickedItems={clickedItems}
+          starShipData={computerCardInfoData}
+        />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../service";
 
@@ -20,6 +21,7 @@ interface CardProps {
   clickable: boolean;
   clickedItems: number[];
   onClickItem?: (id: number) => void;
+  starShipData: StarShipData | null;
 }
 
 const Card = ({
