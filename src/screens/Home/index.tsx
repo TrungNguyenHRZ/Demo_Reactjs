@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./index.css";
 import Card from "./Card";
@@ -6,8 +6,6 @@ import Round from "./Round";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import music from "../Assets/sound/home.mp3";
 import axiosInstance from "../../service";
-import { useEffect } from "react";
-
 
 interface StarShipData {
   name: string;
@@ -23,12 +21,12 @@ const Home = () => {
   const location = useLocation();
   const username = location.state?.username || "User";
   const [clickedItems, setClickedItems] = useState<number[]>([]);
-  //state for scores
   const [userScore, setUserScore] = useState(0);
   const [computerScore, setComputerScore] = useState(0);
-  // state for count
   const [createCount, setCreateCount] = useState<number>(0);
-  const [starShipData, setStarShipData] = useState<[StarShipData | null, StarShipData | null]>([null, null]);
+  const [starShipData, setStarShipData] = useState<
+    [StarShipData | null, StarShipData | null]
+  >([null, null]);
   const [usedIds, setUsedIds] = useState<number[]>([]);
 
   const ids = [
@@ -47,6 +45,7 @@ const Home = () => {
       const starShipResponse2 = await axiosInstance.get(`/${randomId2}`);
       setStarShipData([starShipResponse1.data, starShipResponse2.data]);
       setUsedIds([...usedIds, randomId1, randomId2]);
+      compareAndIncrementScores();
     } catch (error) {
       console.error("Error fetching random starships:", error);
     }
@@ -60,19 +59,77 @@ const Home = () => {
     return randomId;
   };
 
+  const convertToNumberOrNegativeOne = (value: string) => {
+    if (value === "unknown" || value === "n/a") {
+      return -1;
+    }
+    const parsedValue = parseFloat(value);
+    return isNaN(parsedValue) ? -1 : parsedValue;
+  };
+
+  const compareAndIncrementScores = () => {
+    if (starShipData[0] && starShipData[1]) {
+      let newUserScore = userScore;
+      let newComputerScore = computerScore;
+
+      const userSpeed = convertToNumberOrNegativeOne(
+        starShipData[0].max_atmosphering_speed
+      );
+      const computerSpeed = convertToNumberOrNegativeOne(
+        starShipData[1].max_atmosphering_speed
+      );
+
+      if (userSpeed > computerSpeed) {
+        newUserScore = newUserScore + 1;
+      } else if (userSpeed < computerSpeed) {
+        newComputerScore = newComputerScore + 1;
+      }
+
+      const userCost = convertToNumberOrNegativeOne(
+        starShipData[0].cost_in_credits
+      );
+      const computerCost = convertToNumberOrNegativeOne(
+        starShipData[1].cost_in_credits
+      );
+      if (userCost !== -1 && computerCost !== -1) {
+        if (userCost > computerCost) {
+          newUserScore = newUserScore + 1;
+        } else if (userCost < computerCost) {
+          newComputerScore = newComputerScore + 1;
+        }
+      }
+
+      const userPassengers = convertToNumberOrNegativeOne(
+        starShipData[0].passengers
+      );
+      const computerPassengers = convertToNumberOrNegativeOne(
+        starShipData[1].passengers
+      );
+      if (userPassengers !== -1 && computerPassengers !== -1) {
+        if (userPassengers > computerPassengers) {
+          newUserScore = newUserScore + 1;
+        } else if (userPassengers < computerPassengers) {
+          newComputerScore = newComputerScore + 1;
+        }
+      }
+
+      setUserScore(newUserScore);
+      setComputerScore(newComputerScore);
+    }
+  };
+
   const handleCardUserClick = () => {
     console.log("Clicked!");
+    compareAndIncrementScores();
   };
 
   const handlePlayMusic = () => {
     if (audioRef.current) {
       if (audioRef.current.paused) {
         audioRef.current.play();
-        console.log("played");
         setIsMusicPlaying(true);
       } else {
         audioRef.current.pause();
-        console.log("paused");
         setIsMusicPlaying(false);
       }
     }
@@ -86,7 +143,6 @@ const Home = () => {
       <button onClick={handlePlayMusic}>
         {isMusicPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
       </button>
-      {""}
       <div className="my-logo-class">
         <img
           className="my-logo"
@@ -122,7 +178,12 @@ const Home = () => {
           onClickItem={(id) => setClickedItems((prev) => [...prev, id])}
           starShipData={starShipData[0]}
         />
-        <Card type="computer" clickable={false} clickedItems={clickedItems} starShipData={starShipData[1]} />
+        <Card
+          type="computer"
+          clickable={false}
+          clickedItems={clickedItems}
+          starShipData={starShipData[1]}
+        />
       </div>
     </div>
   );
